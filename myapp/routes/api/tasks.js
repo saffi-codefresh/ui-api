@@ -7,10 +7,10 @@ const uuid = require('uuid');
 router.get('/', (req, res) => res.json(tasks));
 // get single task
 router.get('/:id', (req, res) => {//console.log(req)
-    const found = members.filter(m => m.id === parseInt(req.params.id));
-    console.log(`${found.toString()}`)
-    if (found.length) {
-        res.json(found[0]);
+    const foundLst = tasks.filter(m => m.id ===req.params.id);
+    console.log(`${foundLst.toString()}`)
+    if (foundLst.length) {
+        res.json(foundLst[0]);
     } else {
         res.status = 400;
         res.json({ error: true, msg: `Not found - requested ${JSON.stringify(req.params)}` })
@@ -41,18 +41,18 @@ router.post('/', (req, res) => {
 // Update Task
 router.put('/:id', (req, res) => {
     const updatedTask = req.body;
-    const found = tasks.filter(m => m.id === req.params.id);
-    console.log(`${found.toString()}`)
-    if (!found.length) {
+    const foundLst = tasks.filter(m => m.id === req.params.id);
+    console.log(`${foundLst.toString()}`)
+    if (!foundLst.length) {
         res.status = 400;
         return res.json({ error: true, msg: `Not found - reqested ${req.params.id}` })
     }
-
+    let found = foundLst[0];
 
     found.name = updatedTask.name ? updatedTask.name : found.name;
     found.desc = updatedTask.desc ? updatedTask.desc : found.desc;
-    found.done = updatedTask.done ? updatedTask.done : found.done;
-    res.json({ updatedTask: found[0] });
+    found.done = typeof (updatedTask.done)=='boolean' ? updatedTask.done : found.done || flase;
+    res.json({ found: found });
 
 });
 

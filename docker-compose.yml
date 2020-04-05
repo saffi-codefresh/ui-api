@@ -1,0 +1,52 @@
+version: '3.7'
+services:
+  mongodb:
+    image: mongo:3.6.13 #latest
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - ./mongodb/mongod.conf:/etc/mongod.conf
+      - ./mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+      - db-shist:/home/mongodb/.dbshell:rw
+      - db-home:/home/:rw
+      - db-data:/data/db/:rw
+      - db-log:/var/log/mongodb/:rw
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "$MONGO_INITDB_ROOT_USERNAME"
+      MONGO_INITDB_ROOT_PASSWORD: "$MONGO_INITDB_ROOT_PASSWORD"
+    ports:
+      - 27017:27017
+    networks:
+      - overlay
+    command: ["-f", "/etc/mongod.conf"]
+
+  myapp:
+    build: .
+    container_name: myapp
+    hostname: express
+    image: node:10.15.3
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 5000:5000
+    networks:
+      - overlay
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+
+
+
+volumes:
+  db-shist:
+  db-data:
+  db-log:
+  db-home:
+
+networks:
+  overlay:

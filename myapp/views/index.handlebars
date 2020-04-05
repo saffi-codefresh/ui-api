@@ -34,7 +34,7 @@
         <li class="list-group-item">{{this.name}}
             <ul>
                 <li class="list-group-item">
-                    <input type="checkbox" checked="{{this.done}}" onclick="toggleThis('{{this.id}}', this.checked)">{{this.desc}}</input>
+                    <input type="checkbox" {{#if this.done}}checked{{/if}} onclick="toggleThis('{{this.id}}', this.checked)">{{this.desc}}</input>
                 </li>
             </ul>
         </li>
