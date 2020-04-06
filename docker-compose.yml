@@ -7,7 +7,7 @@ services:
     volumes:
       - ./mongodb/mongod.conf:/etc/mongod.conf
       - ./mongodb/initdb.d/:/docker-entrypoint-initdb.d/
-      - db-shist:/home/mongodb/.dbshell:rw
+      - db-mongo:/home/mongodb/:rw
       - db-home:/home/:rw
       - db-data:/data/db/:rw
       - db-log:/var/log/mongodb/:rw
@@ -17,7 +17,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "$MONGO_INITDB_ROOT_USERNAME"
       MONGO_INITDB_ROOT_PASSWORD: "$MONGO_INITDB_ROOT_PASSWORD"
     ports:
-      - 27017:27017
+      - 27018:27017
     networks:
       - overlay
     command: ["-f", "/etc/mongod.conf"]
@@ -43,10 +43,10 @@ services:
 
 
 volumes:
-  db-shist:
   db-data:
   db-log:
   db-home:
+  db-mongo:
 
 networks:
   overlay:

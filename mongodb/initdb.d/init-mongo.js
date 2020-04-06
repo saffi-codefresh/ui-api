@@ -1,4 +1,5 @@
 db = db.getSiblingDB('myappdb')
+db.dummycollection.insert({"dummy":(new Date()).toISOString()});
 
 db.createUser(
     {
@@ -10,7 +11,6 @@ db.createUser(
             }
         ]
     });
-db.create.insert({"name":(new Date()).toISOString()});
 
 db.createUser(
     {
