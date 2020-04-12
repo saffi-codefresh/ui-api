@@ -20,7 +20,7 @@ steps:
   Freestyle:
     title: Running docker image
     type: freestyle
-    working_directory: '.'
+    working_directory: '${{CF_REPO_NAME}}'
     arguments:
       image: 'alpine:3.8'
       commands:
@@ -30,7 +30,7 @@ steps:
   build:
     title: "Building Docker image"
     type: "build"
-    working_directory: '.'
+    working_directory: '${{CF_REPO_NAME}}'
     arguments:
       image_name: 'safficodefresh/${{CF_REPO_NAME}}'
       tag: master
