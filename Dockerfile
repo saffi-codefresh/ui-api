@@ -4,5 +4,6 @@ WORKDIR /usr/src/app
 COPY myapp/package.json /usr/src/app/
 COPY myapp /usr/src/app
 RUN yarn install
+RUN add jest --ignore-engines
 EXPOSE 5000
 CMD [ "npm", "start" ]
