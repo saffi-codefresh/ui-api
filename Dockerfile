@@ -6,4 +6,5 @@ COPY myapp /usr/src/app
 RUN yarn install
 RUN yarn add jest --ignore-engines
 EXPOSE 5000
+
 CMD [ "npm", "start" ]
