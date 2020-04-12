@@ -44,9 +44,10 @@ steps:
     title: "Running test"
     type: "freestyle" # Run any command
     image: "safficodefresh/${{CF_REPO_NAME}}" # The image in which command will be executed
-    working_directory: "." # Running command where code cloned
+    working_directory: "${{CF_REPO_NAME}}/myapp" # Running command where code cloned
     commands:
       - echo " cur dir - $(pwd)"
-      - cd myapp && yarn test
+      - yarn add jest --ignore-engines
+      - yarn test
     stage: "test"
 
