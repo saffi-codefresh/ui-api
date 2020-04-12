@@ -52,6 +52,6 @@ steps:
     image: "safficodefresh/ui-api" # The image in which command will be executed
     working_directory: "." # Running command where code cloned
     commands:
-      - "cd myapp && yarn run test"
+      - "cd myapp && yarn test"
     stage: "test"
 
