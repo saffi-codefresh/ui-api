@@ -26,6 +26,7 @@ steps:
       commands:
         - echo "Hello world"
         - ls -ltr
+        - echo $(pwd)
 
   build:
     title: "Building Docker image"
