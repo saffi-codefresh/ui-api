@@ -30,7 +30,7 @@ steps:
   build:
     title: "Building Docker image"
     type: "build"
-    working_directory: '${{CF_REPO_NAME}}'
+    working_directory: '.'
     arguments:
       image_name: 'safficodefresh/${{CF_REPO_NAME}}'
       tag: master
