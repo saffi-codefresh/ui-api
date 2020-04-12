@@ -1,9 +1,9 @@
 const MongoClient = require('mongodb').MongoClient
-const defaultMongoUrl = 'mongodb://mongo:mongo@192.168.99.100:27017/?authSource=myappdb';
-const MONGO_URL = process.env.MONGO_URL || defaultMongoUrl;
-
-const url = MONGO_URL;
 const dbname = "myappdb";
+const defaultMongoUrl = `mongodb://mongo:mongo@192.168.99.100:27018/?authSource=${dbname}`;
+const MONGO_URL = process.env.MONGO_URL || defaultMongoUrl;
+console.log(`connecting to mongo with MONGO_URL ${MONGO_URL}`);
+const url = MONGO_URL;
 const getDb = async () => {
     const client = await MongoClient.connect(
         url,
@@ -21,11 +21,11 @@ const getDb = async () => {
 const dbFind = async (collname, query) => {
     let db, client;
     try {
-        client = await MongoClient.connect(url, { useNewUrlParser: true });
+        client = await MongoClient.connect(url, { useNewUrlParser: true  });
         db = client.db(dbname);
         return await db.collection(collname).find(query).toArray();
     } finally {
-        client.close();
+        client && client.close();
     }
 };
 
@@ -36,7 +36,7 @@ const dbStore = async (collname, items) => {
         db = client.db(dbname);
         return await db.collection(collname).insertMany(items);
     } finally {
-        client.close();
+        client && client.close();
     }
 };
 
@@ -47,7 +47,7 @@ const dbRemove = async (collname, items) => {
         db = client.db(dbname);
         return await db.collection(collname).removeMany(collname, items);
     } finally {
-        client.close();
+        client && client.close();
     }
 };
 
