@@ -20,7 +20,7 @@ steps:
   Freestyle:
     title: Running docker image
     type: freestyle
-    working_directory: '${{CF_REPO_NAME}}'
+    working_directory: '.'
     arguments:
       image: 'alpine:3.8'
       commands:
@@ -44,8 +44,9 @@ steps:
     title: "Running test"
     type: "freestyle" # Run any command
     image: "safficodefresh/${{CF_REPO_NAME}}" # The image in which command will be executed
-    working_directory: "${{CF_REPO_NAME}}" # Running command where code cloned
+    working_directory: "." # Running command where code cloned
     commands:
-      - "cd myapp && yarn test"
+      - echo " cur dir - $(pwd)"
+      - cd myapp && yarn test
     stage: "test"
 
