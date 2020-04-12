@@ -10,14 +10,6 @@ stages:
   - "test"
 
 steps:
-  #  clone:
-  #    title: "Cloning repository"
-  #    type: "git-clone"
-  #    repo: "https://github.com/saffi-codefresh/ui-api"
-  #    # Clone the master branch. Or, use ${{CF_BRANCH}} to get branch name from trigger
-  #    # Learn more at https://codefresh.io/docs/docs/codefresh-yaml/variables/
-  #    revision: "master"
-  #    stage: "clone"
   clone:
     title: Cloning main repository...
     type: git-clone
@@ -40,7 +32,7 @@ steps:
     type: "build"
     working_directory: '.'
     arguments:
-      image_name: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+      image_name: 'safficodefresh/${{CF_REPO_NAME}}'
       tag: master
     # Set 'latest' tag on the image. Or, use built-in variables
     # like ${{CF_BRANCH_TAG_NORMALIZED}} to use the current branch name/tag.
@@ -50,7 +42,7 @@ steps:
   test:
     title: "Running test"
     type: "freestyle" # Run any command
-    image: "safficodefresh/ui-api" # The image in which command will be executed
+    image: "safficodefresh/${{CF_REPO_NAME}}" # The image in which command will be executed
     working_directory: "${{CF_REPO_NAME}}" # Running command where code cloned
     commands:
       - "cd myapp && yarn test"
