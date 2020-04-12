@@ -44,7 +44,7 @@ steps:
     title: "Running test"
     type: "freestyle" # Run any command
     image: "safficodefresh/${{CF_REPO_NAME}}" # The image in which command will be executed
-    working_directory: "${{CF_REPO_NAME}}/myapp" # Running command where code cloned
+    working_directory: "myapp" # Running command where code cloned
     commands:
       - echo " cur dir - $(pwd)"
       - yarn test
