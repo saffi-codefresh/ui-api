@@ -23,7 +23,7 @@ services:
       - overlay
     command: ["-f", "/etc/mongod.conf"]
 
-  myapp:
+  myapp2:
     build: .
     container_name: myapp
     hostname: express
