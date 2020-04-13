@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
 const dbname = "myappdb";
-const defaultMongoUrl = `mongodb://mongo:mongo@192.168.99.100:27018/?authSource=${dbname}`;
+const defaultMongoUrl = `mongodb://mongo:mongo@mongodb:27017/?authSource=${dbname}`;
 const MONGO_URL = process.env.MONGO_URL || defaultMongoUrl;
 console.log(`connecting to mongo with MONGO_URL ${MONGO_URL}`);
 const url = MONGO_URL;
