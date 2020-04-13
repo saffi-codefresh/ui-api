@@ -47,6 +47,7 @@ steps:
     working_directory: "myapp" # Running command where code cloned
     commands:
       - echo " cur dir - $(pwd)"
+      - yarn add jest --ignore-engines
       - yarn test
     stage: "test"
 
