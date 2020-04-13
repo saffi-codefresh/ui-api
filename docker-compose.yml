@@ -41,6 +41,16 @@ services:
     depends_on:
       - mongodb
 
+#
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://myapp:5000/api/ping"]
+#      interval: 1m30s
+#      timeout: 10s
+#      retries: 3
+#      # start_period: 40s
+
+#  test: ["CMD-SHELL", "curl -f http://myapp:5000 || exit 1"]
+
 
 
 volumes:

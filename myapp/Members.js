@@ -34,7 +34,7 @@ const setMembers = async (members)=> {
 
 getMembers().then( found => {
     members.push(...found);
-    console.log(`loaded members ${members}`)
-})
+    console.log(`loaded members ${JSON.stringify(members)}`)
+});
 
 module.exports = { setMembers:setMembers, getMembers:getMembers, getMember:getMember, removeMember:removeMember};

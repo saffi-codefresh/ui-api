@@ -6,5 +6,6 @@ COPY myapp /usr/src/app
 RUN yarn install
 RUN yarn add jest --ignore-engines
 EXPOSE 5000
+HEALTHCHECK CMD curl --fail http://localhost:5000/api/ping || exit 1
 
 CMD [ "npm", "start" ]
