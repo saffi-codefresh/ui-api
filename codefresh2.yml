@@ -1,0 +1,53 @@
+# More examples of Codefresh YAML can be found at
+# https://codefresh.io/docs/docs/yaml-examples/examples/
+
+version: "1.0"
+mode: sequential
+# Stages can help you organize your steps in stages
+stages:
+  - "clone"
+  - "build"
+  - "test"
+
+steps:
+  clone:
+    title: Cloning main repository...
+    type: git-clone
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: '${{CF_REVISION}}'
+    stage: 'clone'
+
+  Freestyle:
+    title: Running docker image
+    type: freestyle
+    working_directory: '${{CF_REPO_NAME}}'
+    arguments:
+      image: 'alpine:3.8'
+      commands:
+        - echo "Hello world"
+        - ls -ltr
+        - echo $(pwd)
+
+  build:
+    title: "Building Docker image"
+    type: "build"
+    working_directory: '${{CF_REPO_NAME}}'
+    arguments:
+      image_name: 'safficodefresh/${{CF_REPO_NAME}}'
+      tag: master
+    # Set 'latest' tag on the image. Or, use built-in variables
+    # like ${{CF_BRANCH_TAG_NORMALIZED}} to use the current branch name/tag.
+    dockerfile: "Dockerfile"
+    stage: "build"
+
+  test:
+    title: "Running test"
+    type: "freestyle" # Run any command
+    image: "safficodefresh/${{CF_REPO_NAME}}" # The image in which command will be executed
+    working_directory: "${{CF_REPO_NAME}}/myapp" # Running command where code cloned
+    commands:
+      - echo " cur dir - $(pwd)"
+      - yarn add jest --ignore-engines
+      - yarn test
+    stage: "test"
+
