@@ -34,7 +34,7 @@ steps:
     working_directory: '${{CF_REPO_NAME}}'
     arguments:
       image_name: 'safficodefresh/${{CF_REPO_NAME}}'
-      tag: master2
+      tag: master1
     # Set 'latest' tag on the image. Or, use built-in variables
     # like ${{CF_BRANCH_TAG_NORMALIZED}} to use the current branch name/tag.
     dockerfile: "Dockerfile"
