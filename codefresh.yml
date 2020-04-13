@@ -20,7 +20,7 @@ steps:
   Freestyle:
     title: Running docker image
     type: freestyle
-    working_directory: '.'
+    working_directory: '${{clone}}'
     arguments:
       image: 'alpine:3.8'
       commands:
@@ -31,7 +31,7 @@ steps:
   build:
     title: "Building Docker image"
     type: "build"
-    working_directory: '.'
+    working_directory: '${{clone}}'
     arguments:
       image_name: 'safficodefresh/${{CF_REPO_NAME}}'
       tag: master
@@ -44,7 +44,7 @@ steps:
     title: "Running test"
     type: "freestyle" # Run any command
     image: "safficodefresh/${{CF_REPO_NAME}}" # The image in which command will be executed
-    working_directory: "myapp" # Running command where code cloned
+    working_directory: "${{clone}}/myapp" # Running command where code cloned
     commands:
       - echo " cur dir - $(pwd)"
       - yarn add jest --ignore-engines
