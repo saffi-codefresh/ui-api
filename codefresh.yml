@@ -51,3 +51,10 @@ steps:
       - yarn test
     stage: "test"
 
+  push_to_my_registry:
+    stage: 'push'
+    type: push
+    title: Pushing to a registry ${{CF_BRANCH_TAG_NORMALIZED}}
+    candidate: ${{build}}
+    registry: dockerhub
+    image_name: safficodefresh/ui-api
