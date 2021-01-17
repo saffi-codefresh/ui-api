@@ -58,3 +58,4 @@ steps:
     candidate: ${{build}}
     registry: dockerhub
     image_name: safficodefresh/ui-api
+
