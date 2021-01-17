@@ -56,6 +56,7 @@ steps:
     stage: 'push'
     type: push
     title: Pushing to a registry ${{CF_BRANCH_TAG_NORMALIZED}}
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}tag
     candidate: ${{build}}
     registry: dockerhub
     image_name: safficodefresh/ui-api
