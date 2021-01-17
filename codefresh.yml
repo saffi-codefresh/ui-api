@@ -35,7 +35,7 @@ steps:
     working_directory: '${{clone}}'
     arguments:
       image_name: 'safficodefresh/${{CF_REPO_NAME}}'
-      tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+      tag: ${{CF_BRANCH_TAG_NORMALIZED}}tag
     # Set 'latest' tag on the image. Or, use built-in variables
     # like ${{CF_BRANCH_TAG_NORMALIZED}} to use the current branch name/tag.
     dockerfile: "Dockerfile"
@@ -56,7 +56,6 @@ steps:
     stage: 'push'
     type: push
     title: Pushing to a registry ${{CF_BRANCH_TAG_NORMALIZED}}
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}}tag'
     candidate: ${{build}}
     registry: dockerhub
     image_name: safficodefresh/ui-api
