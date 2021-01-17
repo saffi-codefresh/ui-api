@@ -8,6 +8,7 @@ stages:
   - "clone"
   - "build"
   - "test"
+  - "push"
 
 steps:
   clone:
@@ -34,7 +35,7 @@ steps:
     working_directory: '${{clone}}'
     arguments:
       image_name: 'safficodefresh/${{CF_REPO_NAME}}'
-      tag: master
+      tag: ${{CF_BRANCH_TAG_NORMALIZED}}
     # Set 'latest' tag on the image. Or, use built-in variables
     # like ${{CF_BRANCH_TAG_NORMALIZED}} to use the current branch name/tag.
     dockerfile: "Dockerfile"
